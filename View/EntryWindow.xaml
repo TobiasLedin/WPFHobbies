@@ -1,0 +1,36 @@
+﻿<Window x:Class="WPFHobbies.View.EntryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFHobbies.View"
+        xmlns:vm="clr-namespace:WPFHobbies.ViewModels"
+        mc:Ignorable="d"
+        WindowStyle="None" WindowStartupLocation="CenterOwner"
+        Background="#FFA0B0BB"
+        Title="EntryWindow" Height="300" MinHeight="300" Width="300" MinWidth="300">
+
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="10">
+            <TextBlock Text="Add new hobby" FontFamily="Segoe UI" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,5"/>
+            <TextBlock Text="Name*" FontSize="16"/>
+            <TextBox Text="{Binding NewHobbyName, Mode=TwoWay}" FontSize="16" Padding="3" Background="#7FFFFFFF"/>
+            <TextBlock Text="Description" FontSize="16" Margin="0,5,0,0"/>
+            <TextBox Text="{Binding NewHobbyDescription, Mode=TwoWay}" FontSize="16" Height="80" TextWrapping="Wrap" Padding="3" Background="#7FFFFFFF"/>
+            <TextBlock Text="*Required value" FontWeight="SemiBold"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="8">
+            <Button Content="Save" Command="{Binding CreateCommand}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="18" Padding="3" Margin="0,0,5,0"></Button>
+            <Button Content="Cancel" Command="{Binding CloseWindowCommand}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="18" Padding="3" Margin="0,0,5,0"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
