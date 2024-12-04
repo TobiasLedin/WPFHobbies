@@ -43,12 +43,12 @@ namespace WPFHobbies.ViewModels
         public string? NewHobbyName
         {
             get { return _newHobbyName; }
-            set 
+            set
             {
                 _newHobbyName = value;
                 RaisePropertyChanged();
             }
-        } 
+        }
 
         public string? NewHobbyDescription
         {
@@ -58,12 +58,12 @@ namespace WPFHobbies.ViewModels
                 _newHobbyDescription = value;
                 RaisePropertyChanged();
             }
-        } 
+        }
 
         public MainWindowViewModel()
         {
-            CreateCommand = new DelegateCommand(AddHobby);
-            DeleteCommand = new DelegateCommand(DeleteHobby);
+            CreateCommand = new DelegateCommand(param => AddHobby(), param => CanAddHobby());
+            DeleteCommand = new DelegateCommand(param => DeleteHobby(), param => CanDeleteHobby());
             OpenWindowCommand = new DelegateCommand(OpenEntryWindow);
             CloseWindowCommand = new DelegateCommand(CloseEntryWindow);
 
@@ -76,30 +76,44 @@ namespace WPFHobbies.ViewModels
                     new Hobby("Ice hockey", "A group of people wearing ice skates chasing a puck with clubs.")));
         }
 
-        // Creates a new HobbyViewModel with a new Hobby based in inputted name and description.
-        // To enable save to collection, field for Name cannot be empty.
-        private void AddHobby(object? parameter)
+        // Creates a new HobbyViewModel with a new Hobby based on inputted name and description.
+        private void AddHobby()
         {
-            if (!string.IsNullOrEmpty(_newHobbyName))
+            Hobbies.Add(new HobbyViewModel(
+                new Hobby(_newHobbyName ?? throw new ArgumentNullException("Property Name cannot be null"),
+                                _newHobbyDescription ?? string.Empty)));
+
+            CloseEntryWindow(null);
+        }
+
+        // Validate that _newHobbyName is not null/empty and that string contains more than two characters.
+        private bool CanAddHobby()
+        {
+            if (!string.IsNullOrEmpty(_newHobbyName) && _newHobbyName.Length > 2)
             {
-                Hobbies.Add(new HobbyViewModel(new Hobby(_newHobbyName, _newHobbyDescription ?? string.Empty)));
-                CloseEntryWindow(null);
-            } 
+                return true;
+            }
+
+            return false;
         }
 
         // Deletes the selected object from the collection.
-        private void DeleteHobby(object? parameter)
+        private void DeleteHobby()
         {
             if (_selectedHobby != null)
             {
                 var mainWindow = Application.Current.MainWindow;
-                var result = MessageBox.Show(mainWindow,$"This action will delete hobby {_selectedHobby.Name}. Press OK to confirm", "Delete hobby", MessageBoxButton.OKCancel);
+                var result = MessageBox.Show(mainWindow, $"This action will delete hobby {_selectedHobby.Name}. Press OK to confirm", "Delete hobby", MessageBoxButton.OKCancel);
                 if (result == MessageBoxResult.OK)
                 {
                     Hobbies.Remove(_selectedHobby);
                 }
-                
             }
+        }
+
+        private bool CanDeleteHobby()
+        {
+            return _selectedHobby != null;
         }
 
         // Open modal with user input fields.
