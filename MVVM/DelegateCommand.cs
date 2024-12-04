@@ -8,10 +8,6 @@ namespace WPFHobbies.MVVM
         private readonly Func<object?, bool>? _canExecute;
 
         public event EventHandler? CanExecuteChanged;
-        //{
-        //    add { CommandManager.RequerySuggested += value; }
-        //    remove { CommandManager.RequerySuggested -= value; }
-        //}
 
         public DelegateCommand(Action<object?> execute, Func<object?, bool>? canExecute = null)
         {
@@ -19,7 +15,6 @@ namespace WPFHobbies.MVVM
             _canExecute = canExecute;
         }
 
-        // Fredriks
         public void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
