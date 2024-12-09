@@ -60,6 +60,33 @@ namespace WPFHobbies.ViewModels
             }
         }
 
+        // Theme test
+
+        private List<string> _themeNames;
+
+        public List<string> ThemeNames
+        {
+            get { return _themeNames; }
+            set 
+            {
+                _themeNames = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private int _selectedTheme;
+
+        public int SelectedTheme
+        {
+            get { return _selectedTheme; }
+            set
+            {
+                _selectedTheme = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
         public MainWindowViewModel()
         {
             CreateCommand = new DelegateCommand(param => AddHobby(), param => CanAddHobby());
@@ -74,6 +101,8 @@ namespace WPFHobbies.ViewModels
                     new Hobby("Knitting", "Making seemingly impossible things out of a thin strands of cotton.")));
             _hobbies.Add(new HobbyViewModel(
                     new Hobby("Ice hockey", "A group of people wearing ice skates chasing a puck with clubs.")));
+
+            _themeNames = ["Standard", "Dark", "High contrast"];
         }
 
         // Creates a new HobbyViewModel with a new Hobby based on inputted name and description.

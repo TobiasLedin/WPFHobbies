@@ -7,30 +7,68 @@
         xmlns:vm="clr-namespace:WPFHobbies.ViewModels"
         mc:Ignorable="d"
         WindowStyle="None" WindowStartupLocation="CenterOwner"
-        Background="#FFA0B0BB"
+        Style="{StaticResource MainWindow}"
         Title="EntryWindow" Height="300" MinHeight="300" Width="300" MinWidth="300">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Margin="10">
-            <TextBlock Text="Add new hobby" FontFamily="Segoe UI" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,5"/>
-            <TextBlock Text="Name*" FontSize="16"/>
-            <TextBox Text="{Binding NewHobbyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" Padding="3" Background="#7FFFFFFF"/>
-            <TextBlock Text="Description" FontSize="16" Margin="0,5,0,0"/>
-            <TextBox Text="{Binding NewHobbyDescription, Mode=TwoWay}" FontSize="16" Height="80" TextWrapping="Wrap" Padding="3" Background="#7FFFFFFF"/>
-            <TextBlock Text="*Required value" FontWeight="SemiBold"/>
+
+        <StackPanel Grid.Row="0"
+                    Margin="10">
+            
+            <TextBlock Grid.Column="0"
+                       Text="Add New Hobby"
+                       FontSize="20"
+                       FontWeight="Bold"/>
+            
+            <TextBlock Style="{StaticResource SameAsBackground}"
+                       Text="Name*"/>
+            
+            <TextBox Text="{Binding NewHobbyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     FontSize="16"
+                     Padding="3"/>
+            
+            <TextBlock Style="{StaticResource SameAsBackground}"
+                       Text="Description"
+                       FontSize="16"
+                       Margin="0,5,0,0"/>
+            
+            <TextBox Text="{Binding NewHobbyDescription, Mode=TwoWay}"
+                     FontSize="16"
+                     Height="80"
+                     TextWrapping="Wrap"
+                     Padding="3"/>
+            
+            <TextBlock Text="*Required value"
+                       FontWeight="SemiBold"/>
+            
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="8">
-            <Button Content="Save" Command="{Binding CreateCommand}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="18" Padding="3" Margin="0,0,5,0"></Button>
-            <Button Content="Cancel" Command="{Binding CloseWindowCommand}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="18" Padding="3" Margin="0,0,5,0"></Button>
+
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Center"
+                    Margin="8">
+            
+            <Button Name="btnSave"
+                    Content="Save"
+                    Command="{Binding CreateCommand}"
+                    Style="{StaticResource Button}"/>
+            
+            <Button Name="btnCancel"
+                    Content="Cancel"
+                    Command="{Binding CloseWindowCommand}"
+                    Style="{StaticResource Button}"/>
+            
         </StackPanel>
     </Grid>
 </Window>

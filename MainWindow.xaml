@@ -7,8 +7,8 @@
         xmlns:local="clr-namespace:WPFHobbies"
         xmlns:vm="clr-namespace:WPFHobbies.ViewModels"
         mc:Ignorable="d"
-        Background="#FFA0B0BB"
         WindowStartupLocation="CenterScreen"
+        Style="{StaticResource MainWindow}"
         Title="Hobbies" Height="500" MinHeight="300" Width="500" MinWidth="400">
 
     <Window.DataContext>
@@ -26,21 +26,51 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,0,5">
-            <Button Name="btnNew" Content="New" Command="{Binding OpenWindowCommand}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="18" Height="auto" Width="auto" Padding="3" Margin="0,0,5,0"/>
-            <Button Name="btnDelete" Content="Delete" Command="{Binding DeleteCommand}" FontFamily="Segoe UI" FontWeight="Normal" FontSize="18" Height="auto" Width="auto" Padding="3" Margin="0,0,5,0"/>
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,0,5">
+            
+            <Button Name="btnNew"
+                    Content="New"
+                    Command="{Binding OpenWindowCommand}"
+                    Style="{StaticResource Button}"/>
+
+            <Button Name="btnDelete"
+                    Content="Delete"
+                    Command="{Binding DeleteCommand}"
+                    Style="{StaticResource Button}">
+            </Button>
+
         </StackPanel>
 
-        <ListView Grid.Row="1" FontSize="16" ItemsSource="{Binding Hobbies}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedHobby}" Background="#7FFFFFFF" />
+        <ListView Grid.Row="1"
+                  FontSize="16"
+                  ItemsSource="{Binding Hobbies}"
+                  DisplayMemberPath="Name"
+                  SelectedItem="{Binding SelectedHobby}">
+        </ListView>
 
-        <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical">
-            <TextBlock Text="Name" FontSize="16" FontWeight="Medium"/>
-            <TextBlock x:Name="tbName" Text="{Binding SelectedHobby.Name}" FontSize="16" Padding="3" Margin="0,0,0,5" Background="#7FFFFFFF"/>
-            <TextBlock Text="Description" FontSize="16" FontWeight="Medium"/>
-            <TextBlock x:Name="tbDescription" Text="{Binding SelectedHobby.Description}" FontSize="16" TextWrapping="Wrap" Height="160" Padding="3" Margin="0,0,0,5" Background="#7FFFFFFF"/>
+        <StackPanel Grid.Row="1"
+                    Grid.Column="2"
+                    Orientation="Vertical">
+            
+            <TextBlock Style="{StaticResource SameAsBackground}"
+                       Text="Name"/>
+            
+            <TextBlock x:Name="tbName"
+                       Text="{Binding SelectedHobby.Name}"
+                       Style="{StaticResource ObjectData}"/>
+            
+            <TextBlock Style="{StaticResource SameAsBackground}"
+                       Text="Description"/>
+            
+            <TextBlock x:Name="tbDescription"
+                       Text="{Binding SelectedHobby.Description}"
+                       Style="{StaticResource ObjectData}"
+                       TextWrapping="Wrap"
+                       Height="160"/>
+        
         </StackPanel>
         
-        
-
     </Grid>
 </Window>
